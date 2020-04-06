@@ -7,6 +7,7 @@ import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
 import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
+import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
 import javax.inject.Inject
 
 class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
@@ -47,7 +48,8 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     override fun showFavourites() {
-        //TODO: navigate to favourites screen
+        val intent = Intent(this, FavouritesActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
 import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
+import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
 import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity(), DetailsScreen {
@@ -42,7 +43,8 @@ class DetailsActivity : AppCompatActivity(), DetailsScreen {
     }
 
     override fun showFavourites() {
-        //TODO: navigate to favourites screen
+        val intent = Intent(this, FavouritesActivity::class.java)
+        startActivity(intent)
     }
 
     override fun navigateBack() {
