@@ -4,6 +4,7 @@ import android.content.Context
 import com.bme.aut.cocktaildatabase.di.modules.InteractorModule
 import com.bme.aut.cocktaildatabase.di.modules.NetworkModule
 import com.bme.aut.cocktaildatabase.di.modules.UIModule
+import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -22,5 +23,7 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
+
+    fun inject(activity: CocktailsActivity)
 
 }
