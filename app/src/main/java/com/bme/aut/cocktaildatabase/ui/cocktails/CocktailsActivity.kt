@@ -1,10 +1,12 @@
 package com.bme.aut.cocktaildatabase.ui.cocktails
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
 import com.bme.aut.cocktaildatabase.model.Cocktail
+import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
 import javax.inject.Inject
 
 class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
@@ -35,7 +37,9 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     override fun showDetails(cocktailId: String) {
-        //TODO: navigate to details screen
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(DetailsActivity.KEY, cocktailId)
+        startActivity(intent)
     }
 
     override fun showSearchResults(cocktails: ArrayList<Cocktail>) {

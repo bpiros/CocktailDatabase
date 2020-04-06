@@ -5,6 +5,7 @@ import com.bme.aut.cocktaildatabase.di.modules.InteractorModule
 import com.bme.aut.cocktaildatabase.di.modules.NetworkModule
 import com.bme.aut.cocktaildatabase.di.modules.UIModule
 import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
+import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -25,5 +26,6 @@ interface AppComponent {
     }
 
     fun inject(activity: CocktailsActivity)
+    fun inject(activity: DetailsActivity)
 
 }
