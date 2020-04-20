@@ -2,11 +2,16 @@ package com.bme.aut.cocktaildatabase.ui.details
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
+import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
 import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
+import com.bme.aut.cocktaildatabase.ui.utils.hide
+import com.bme.aut.cocktaildatabase.ui.utils.show
+import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity(), DetailsScreen {
@@ -33,8 +38,14 @@ class DetailsActivity : AppCompatActivity(), DetailsScreen {
     }
 
     private fun init() {
-        //TODO: get data from bundles
+        val cocktailId = intent.getIntExtra(DetailsActivity.KEY, 0)
+        detailsPresenter.showDetails(cocktailId)
+
         //TODO: init ui elements
+    }
+
+    override fun showDetails(cocktail: Cocktail) {
+        //TODO: show details on page
     }
 
     override fun showCocktails() {
@@ -49,6 +60,18 @@ class DetailsActivity : AppCompatActivity(), DetailsScreen {
 
     override fun navigateBack() {
         onBackPressed()
+    }
+
+    override fun startLoading() {
+        progressbar.show()
+    }
+
+    override fun endLoading() {
+        progressbar.hide()
+    }
+
+    override fun showNetworkError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     companion object {

@@ -1,11 +1,16 @@
 package com.bme.aut.cocktaildatabase.ui.favourites
 
-interface FavouritesScreen {
+import com.bme.aut.cocktaildatabase.model.Cocktail
+import com.bme.aut.cocktaildatabase.ui.Screen
+
+interface FavouritesScreen : Screen {
 
     fun removeFromFavourites(cocktailId: String)
 
-    fun showToCocktails()
+    fun updateFavourites(cocktail: Cocktail)
 
-    fun showToDetails(cocktailId: String)
+    fun showCocktails()
+
+    fun showDetails(cocktailId: String)
 
 }
