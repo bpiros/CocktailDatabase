@@ -1,8 +1,14 @@
 package com.bme.aut.cocktaildatabase.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class Cocktail(
+
+    @PrimaryKey
+    var databaseId: Int,
 
     @SerializedName("idDrink")
     val idDrink: String? = null,

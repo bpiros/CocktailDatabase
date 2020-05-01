@@ -21,6 +21,7 @@ class NetworkModule {
         return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
+    @Provides
     @Singleton
     fun provideCocktailApi(client: OkHttpClient): CocktailApi {
         val retrofit = Retrofit.Builder()

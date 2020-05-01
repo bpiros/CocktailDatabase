@@ -1,9 +1,7 @@
 package com.bme.aut.cocktaildatabase.di.components
 
 import android.content.Context
-import com.bme.aut.cocktaildatabase.di.modules.InteractorModule
-import com.bme.aut.cocktaildatabase.di.modules.NetworkModule
-import com.bme.aut.cocktaildatabase.di.modules.UIModule
+import com.bme.aut.cocktaildatabase.di.modules.*
 import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
 import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
 import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
@@ -16,7 +14,9 @@ import javax.inject.Singleton
     modules = [
         UIModule::class,
         NetworkModule::class,
-        InteractorModule::class
+        InteractorModule::class,
+        RepositoryModule::class,
+        DatabaseModule::class
     ]
 )
 interface AppComponent {
