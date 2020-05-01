@@ -6,6 +6,6 @@ interface Screen {
 
     fun endLoading()
 
-    fun showNetworkError(message: String)
+    fun showToast(message: String)
 
 }

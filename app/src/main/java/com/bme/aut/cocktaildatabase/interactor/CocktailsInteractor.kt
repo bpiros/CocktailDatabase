@@ -1,14 +1,16 @@
 package com.bme.aut.cocktaildatabase.interactor
 
-import com.bme.aut.cocktaildatabase.interactor.events.GetCocktailDetailsEvent
-import com.bme.aut.cocktaildatabase.interactor.events.GetCocktailsEvent
-import com.bme.aut.cocktaildatabase.interactor.events.SearchCocktailEvent
+import com.bme.aut.cocktaildatabase.interactor.events.*
 import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.network.CocktailApi
+import com.bme.aut.cocktaildatabase.repository.CocktailRepository
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
-class CocktailsInteractor @Inject constructor(private var cocktailApi: CocktailApi) {
+class CocktailsInteractor @Inject constructor(
+    private var cocktailApi: CocktailApi,
+    private var cocktailRepository: CocktailRepository
+) {
 
     fun getCocktails() {
         val event = GetCocktailsEvent()
@@ -81,9 +83,27 @@ class CocktailsInteractor @Inject constructor(private var cocktailApi: CocktailA
     }
 
     fun getFavourites() {
-        //TODO: get favourite id-s from database
+        cocktailRepository.getAllFavourite { cocktails ->
+            GetCocktailsEvent()
+            EventBus.getDefault().post(GetFavouritesEvent(cocktails = cocktails))
+        }
+    }
 
-        //TODO: mindegyikre meghívni a getCocktailDetails-t és postolni egy eventet igy fog frissulni a favourites lista
+    fun deleteFromFavourites(cocktail: Cocktail) {
+        cocktailRepository.deleteFromFavourites(cocktail) {
+            EventBus.getDefault().post(
+                RemovedFromFavouritesEvent(
+                    cocktailName = cocktail.strDrink
+                )
+            )
+        }
+
+    }
+
+    fun saveToFavourites(cocktail: Cocktail) {
+        cocktailRepository.saveToFavourite(cocktail) {
+            EventBus.getDefault().post(SavedToFavouritesEvent(cocktailName = cocktail.strDrink))
+        }
     }
 
 }

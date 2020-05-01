@@ -2,6 +2,7 @@ package com.bme.aut.cocktaildatabase.ui.details
 
 import com.bme.aut.cocktaildatabase.interactor.CocktailsInteractor
 import com.bme.aut.cocktaildatabase.interactor.events.GetCocktailDetailsEvent
+import com.bme.aut.cocktaildatabase.interactor.events.SavedToFavouritesEvent
 import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -39,17 +40,17 @@ class DetailsPresenter @Inject constructor(private val cocktailsInteractor: Cock
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onSearchCocktailThread(event: GetCocktailDetailsEvent) {
+    fun onDetailsThread(event: GetCocktailDetailsEvent) {
         screen?.endLoading()
         if (event.throwable != null) {
             event.throwable?.printStackTrace()
             if (screen != null) {
-                screen?.showNetworkError(event.throwable?.message.orEmpty())
+                screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
             if (screen != null) {
                 if (event.cocktail == null) {
-                    screen?.showNetworkError("Something went wrong. Try it later.")
+                    screen?.showToast("Something went wrong. Try it later.")
                 } else {
                     screen?.showDetails(event.cocktail!!)
                 }
@@ -57,4 +58,15 @@ class DetailsPresenter @Inject constructor(private val cocktailsInteractor: Cock
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onDetailsThread(event: SavedToFavouritesEvent) {
+        if (event.throwable != null) {
+            event.throwable?.printStackTrace()
+            if (screen != null) {
+                screen?.showToast(event.throwable?.message.orEmpty())
+            }
+        } else {
+            screen?.showToast("${event.cocktailName} added to favourites")
+        }
+    }
 }

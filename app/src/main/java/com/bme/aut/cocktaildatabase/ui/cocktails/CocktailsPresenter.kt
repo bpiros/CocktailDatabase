@@ -2,7 +2,9 @@ package com.bme.aut.cocktaildatabase.ui.cocktails
 
 import com.bme.aut.cocktaildatabase.interactor.CocktailsInteractor
 import com.bme.aut.cocktaildatabase.interactor.events.GetCocktailsEvent
+import com.bme.aut.cocktaildatabase.interactor.events.SavedToFavouritesEvent
 import com.bme.aut.cocktaildatabase.interactor.events.SearchCocktailEvent
+import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -32,12 +34,12 @@ class CocktailsPresenter @Inject constructor(private val cocktailsInteractor: Co
         cocktailsInteractor.searchCocktail(searchTerm)
     }
 
-    fun addToFavourites(cocktailId: String) {
-        //TODO: implement add to favourites logic
+    fun addToFavourites(cocktail: Cocktail) {
+        cocktailsInteractor.saveToFavourites(cocktail)
     }
 
-    fun removeFromFavourites(cocktailsId: String) {
-        //TODO: implement remove from favourites logic
+    fun removeFromFavourites(cocktail: Cocktail) {
+        cocktailsInteractor.deleteFromFavourites(cocktail)
     }
 
     fun showFavourites() {
@@ -54,12 +56,12 @@ class CocktailsPresenter @Inject constructor(private val cocktailsInteractor: Co
         if (event.throwable != null) {
             event.throwable?.printStackTrace()
             if (screen != null) {
-                screen?.showNetworkError(event.throwable?.message.orEmpty())
+                screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
             if (screen != null) {
                 if (event.cocktails == null) {
-                    screen?.showNetworkError("Something went wrong. Try it later.")
+                    screen?.showToast("Something went wrong. Try it later.")
                 } else {
                     screen?.showCocktails(event.cocktails!!)
                 }
@@ -68,12 +70,12 @@ class CocktailsPresenter @Inject constructor(private val cocktailsInteractor: Co
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onSearchCocktailThread(event: SearchCocktailEvent) {
+    fun onCocktailsThread(event: SearchCocktailEvent) {
         screen?.endLoading()
         if (event.throwable != null) {
             event.throwable?.printStackTrace()
             if (screen != null) {
-                screen?.showNetworkError(event.throwable?.message.orEmpty())
+                screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
             if (screen != null) {
@@ -83,6 +85,18 @@ class CocktailsPresenter @Inject constructor(private val cocktailsInteractor: Co
                     screen?.showSearchResults(event.cocktails!!)
                 }
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onCocktailsThread(event: SavedToFavouritesEvent) {
+        if (event.throwable != null) {
+            event.throwable?.printStackTrace()
+            if (screen != null) {
+                screen?.showToast(event.throwable?.message.orEmpty())
+            }
+        } else {
+            screen?.showToast("${event.cocktailName} added to favourites")
         }
     }
 }

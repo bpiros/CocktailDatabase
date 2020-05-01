@@ -2,6 +2,8 @@ package com.bme.aut.cocktaildatabase.ui.favourites
 
 import com.bme.aut.cocktaildatabase.interactor.CocktailsInteractor
 import com.bme.aut.cocktaildatabase.interactor.events.GetFavouritesEvent
+import com.bme.aut.cocktaildatabase.interactor.events.RemovedFromFavouritesEvent
+import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -23,13 +25,12 @@ class FavouritesPresenter @Inject constructor(private val cocktailsInteractor: C
 
     fun showFavourites() {
         screen?.startLoading()
-
         cocktailsInteractor.getFavourites()
     }
 
-    fun removeFromFavourites(cocktailId: String) {
-        //TODO: remove it from db
-        screen?.removeFromFavourites(cocktailId)
+    fun removeFromFavourites(cocktail: Cocktail) {
+        cocktailsInteractor.deleteFromFavourites(cocktail)
+        screen?.removeFromFavourites(cocktail.idDrink)
     }
 
     fun showToCocktails() {
@@ -46,16 +47,27 @@ class FavouritesPresenter @Inject constructor(private val cocktailsInteractor: C
         if (event.throwable != null) {
             event.throwable?.printStackTrace()
             if (screen != null) {
-                screen?.showNetworkError(event.throwable?.message.orEmpty())
+                screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
-            if (screen != null) {
-                if (event.cocktail == null) {
-                    screen?.showNetworkError("Something went wrong.")
-                } else {
-                    screen?.updateFavourites(event.cocktail!!)
-                }
+            if (event.cocktails != null) {
+                screen?.showToast("Something went wrong.")
+            } else {
+                screen?.updateFavourites(event.cocktails!!)
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onFavouritesThread(event: RemovedFromFavouritesEvent) {
+        screen?.endLoading()
+        if (event.throwable != null) {
+            event.throwable?.printStackTrace()
+            if (screen != null) {
+                screen?.showToast(event.throwable?.message.orEmpty())
+            }
+        } else {
+            screen?.showToast("${event.cocktailName} removed from favourites")
         }
     }
 

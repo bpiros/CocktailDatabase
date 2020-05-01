@@ -41,11 +41,15 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
         //TODO: init ui elements
     }
 
-    override fun removeFromFavourites(cocktailId: String) {
+    override fun removeFromFavourites(cocktailId: String?) {
         //TODO: update adapter, remove the cocktail from list
     }
 
     override fun updateFavourites(cocktail: Cocktail) {
+        //TODO: update list with cocktail
+    }
+
+    override fun updateFavourites(cocktails: List<Cocktail>) {
         //TODO: update list with cocktail
     }
 
@@ -68,7 +72,7 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
         progressbar?.hide()
     }
 
-    override fun showNetworkError(message: String) {
+    override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 

@@ -41,7 +41,7 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         //TODO: init ui elements
     }
 
-    override fun showCocktails(cocktails: ArrayList<Cocktail>) {
+    override fun showCocktails(cocktails: List<Cocktail>) {
         //TODO: show cocktails
     }
 
@@ -73,7 +73,7 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         messageTextView?.show()
     }
 
-    override fun showNetworkError(message: String) {
+    override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 

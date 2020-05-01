@@ -70,7 +70,7 @@ class DetailsActivity : AppCompatActivity(), DetailsScreen {
         progressbar.hide()
     }
 
-    override fun showNetworkError(message: String) {
+    override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 

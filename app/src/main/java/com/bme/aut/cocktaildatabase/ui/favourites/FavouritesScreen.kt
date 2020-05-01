@@ -5,9 +5,11 @@ import com.bme.aut.cocktaildatabase.ui.Screen
 
 interface FavouritesScreen : Screen {
 
-    fun removeFromFavourites(cocktailId: String)
+    fun removeFromFavourites(cocktailId: String?)
 
     fun updateFavourites(cocktail: Cocktail)
+
+    fun updateFavourites(cocktails: List<Cocktail>)
 
     fun showCocktails()
 

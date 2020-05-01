@@ -33,9 +33,10 @@ class CocktailRepository @Inject constructor(
         }
     }
 
-    fun deleteFromFavourites(cocktail: Cocktail) {
+    fun deleteFromFavourites(cocktail: Cocktail, completion: () -> Unit) {
         ioScope.launch {
             cocktailDao.deleteCocktail(cocktail)
+            completion()
         }
     }
 

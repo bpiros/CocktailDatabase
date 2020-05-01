@@ -1,15 +1,21 @@
 package com.bme.aut.cocktaildatabase.di.modules
 
+import com.bme.aut.cocktaildatabase.repository.CocktailDao
+import com.bme.aut.cocktaildatabase.repository.CocktailDatabase
 import com.bme.aut.cocktaildatabase.repository.CocktailRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-abstract class RepositoryModule {
+class RepositoryModule {
 
-    @Binds
-    abstract fun provideCocktailRepository(cocktailRepository: CocktailRepository): CocktailRepository
+    @Provides
+    @Singleton
+    fun provideCocktailRepository(database: CocktailDatabase, cocktailDao: CocktailDao) =
+        CocktailRepository(
+            database = database,
+            cocktailDao = cocktailDao
+        )
 
 }

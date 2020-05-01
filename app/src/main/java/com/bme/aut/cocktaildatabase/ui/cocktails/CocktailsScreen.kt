@@ -5,7 +5,7 @@ import com.bme.aut.cocktaildatabase.ui.Screen
 
 interface CocktailsScreen :Screen {
 
-    fun showCocktails(cocktails: ArrayList<Cocktail>)
+    fun showCocktails(cocktails: List<Cocktail>)
 
     fun showDetails(cocktailId: String)
 
