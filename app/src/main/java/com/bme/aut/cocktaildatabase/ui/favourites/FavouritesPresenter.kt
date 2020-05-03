@@ -30,7 +30,7 @@ class FavouritesPresenter @Inject constructor(
     fun showFavourites() {
         screen?.startLoading()
         executor.execute {
-            cocktailsInteractor.getFavourites()
+            cocktailsInteractor.getFavourites({})
         }
     }
 
@@ -38,11 +38,10 @@ class FavouritesPresenter @Inject constructor(
         executor.execute {
             cocktailsInteractor.deleteFromFavourites(cocktail)
         }
-        screen?.removeFromFavourites(cocktail.idDrink)
     }
 
-    fun showToCocktails() {
-        screen?.showCocktails()
+    fun navigateToCocktails() {
+        screen?.navigateToCocktails()
     }
 
     fun showToDetails(cocktailId: String) {
@@ -58,7 +57,7 @@ class FavouritesPresenter @Inject constructor(
                 screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
-            if (event.cocktails != null) {
+            if (event.cocktails == null) {
                 screen?.showToast("Something went wrong.")
             } else {
                 screen?.updateFavourites(event.cocktails!!)
@@ -74,7 +73,13 @@ class FavouritesPresenter @Inject constructor(
                 screen?.showToast(event.throwable?.message.orEmpty())
             }
         } else {
-            screen?.showToast("${event.cocktailName} removed from favourites")
+            if (event.cocktailName != null && event.cocktailId != null) {
+                screen?.removeFromFavourites(event.cocktailId)
+                screen?.showToast("${event.cocktailName} removed from favourites")
+            } else {
+                screen?.showToast("Something went wrong.")
+            }
+
         }
     }
 

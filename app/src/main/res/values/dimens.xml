@@ -4,7 +4,7 @@
     <dimen name="height_cocktail_item">390dp</dimen>
     <dimen name="height_cocktail_item_image">300dp</dimen>
     <dimen name="height_cocktail_item_text">50dp</dimen>
-    <dimen name="height_favourite_item">110dp</dimen>
+    <dimen name="height_favourite_item">130dp</dimen>
     <dimen name="height_favourite_item_text">100dp</dimen>
 
     <dimen name="size_favourite_icon">35dp</dimen>

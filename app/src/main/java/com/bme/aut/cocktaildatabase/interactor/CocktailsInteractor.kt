@@ -83,9 +83,13 @@ class CocktailsInteractor @Inject constructor(
 
     }
 
-    fun getFavourites() {
+    fun getFavourites(callback: (favourites: ArrayList<Cocktail>?) -> Unit) {
         cocktailRepository.getAllFavourite { cocktails ->
-            GetCocktailsEvent()
+            if (cocktails == null) {
+                callback(null)
+            } else {
+                callback(ArrayList(cocktails))
+            }
             EventBus.getDefault().post(GetFavouritesEvent(cocktails = cocktails))
         }
     }
@@ -94,7 +98,8 @@ class CocktailsInteractor @Inject constructor(
         cocktailRepository.deleteFromFavourites(cocktail) {
             EventBus.getDefault().post(
                 RemovedFromFavouritesEvent(
-                    cocktailName = cocktail.strDrink
+                    cocktailName = cocktail.strDrink,
+                    cocktailId = cocktail.idDrink
                 )
             )
         }

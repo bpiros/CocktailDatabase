@@ -7,11 +7,9 @@ interface FavouritesScreen : Screen {
 
     fun removeFromFavourites(cocktailId: String?)
 
-    fun updateFavourites(cocktail: Cocktail)
-
     fun updateFavourites(cocktails: List<Cocktail>)
 
-    fun showCocktails()
+    fun navigateToCocktails()
 
     fun showDetails(cocktailId: String)
 

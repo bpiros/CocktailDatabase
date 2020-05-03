@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Cocktail(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var databaseId: Int,
 
     @SerializedName("idDrink")

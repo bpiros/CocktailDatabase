@@ -42,13 +42,10 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     private fun init() {
-        cocktailPresenter.showCocktails()
-
         adapter = CocktailsAdapter(cocktailPresenter)
 
         cocktailsRecyclerview?.layoutManager = LinearLayoutManager(this)
         cocktailsRecyclerview?.adapter = adapter
-//        cocktailsRecyclerview?.addItemDecoration(CocktailsItemDecorator(this))
 
         toolbar?.bind(
             onSearchClick = { searchTerm ->
@@ -75,11 +72,12 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         }
 
         bottomNavigationView?.selectedItemId = R.id.action_cocktails
+        cocktailPresenter.showCocktails()
     }
 
-    override fun showCocktails(cocktails: List<Cocktail>) {
+    override fun showCocktails(cocktails: List<Cocktail>, favourites: ArrayList<Cocktail>?) {
         messageTextView?.hide()
-        adapter.updateData(cocktails)
+        adapter.updateData(cocktails, favourites)
     }
 
     override fun showDetails(cocktailId: String) {
@@ -88,10 +86,13 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         startActivity(intent)
     }
 
-    override fun showSearchResults(cocktails: ArrayList<Cocktail>) {
+    override fun showSearchResults(
+        cocktails: ArrayList<Cocktail>,
+        favourites: ArrayList<Cocktail>?
+    ) {
         messageTextView?.hide()
         adapter.clearData()
-        adapter.updateData(cocktails)
+        adapter.updateData(cocktails, favourites)
     }
 
     override fun showFavourites() {
@@ -117,7 +118,7 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

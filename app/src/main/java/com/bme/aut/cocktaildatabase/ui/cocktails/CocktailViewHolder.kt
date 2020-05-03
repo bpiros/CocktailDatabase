@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bme.aut.cocktaildatabase.R
-import com.bme.aut.cocktaildatabase.model.Cocktail
+import com.bme.aut.cocktaildatabase.model.CocktailItemModel
 import com.bme.aut.cocktaildatabase.ui.utils.hide
 import com.bme.aut.cocktaildatabase.ui.utils.show
 import com.bumptech.glide.Glide
@@ -16,29 +16,28 @@ import kotlinx.android.synthetic.main.view_cocktail_item.view.*
 class CocktailViewHolder(itemView: View, private val cocktailsPresenter: CocktailsPresenter) :
     RecyclerView.ViewHolder(itemView) {
 
-    private lateinit var cocktail: Cocktail
-    private var isAddedToFavourites = false
+    private lateinit var model: CocktailItemModel
 
-    fun bind(cocktail: Cocktail) {
-        this.cocktail = cocktail
+    fun bind(model: CocktailItemModel) {
+        this.model = model
 
-        itemView.cocktialTitleTextView?.text = cocktail.strDrink
+        itemView.cocktialTitleTextView?.text = model.cocktail.strDrink
         itemView.favouriteBackgroundImageView?.setOnClickListener {
-            if (isAddedToFavourites) {
-                cocktailsPresenter.removeFromFavourites(cocktail)
+            if (this.model.isAddedToFavourites) {
+                cocktailsPresenter.removeFromFavourites(this.model.cocktail)
                 itemView.favouriteImageView?.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-                isAddedToFavourites = false
+                this.model.isAddedToFavourites = false
             } else {
-                cocktailsPresenter.addToFavourites(cocktail)
+                cocktailsPresenter.addToFavourites(this.model.cocktail)
                 itemView.favouriteImageView?.setImageResource(R.drawable.ic_favorite_black_24dp)
-                isAddedToFavourites = true
+                this.model.isAddedToFavourites = true
             }
         }
 
         Glide
             .with(itemView)
             .asBitmap()
-            .load(cocktail.strDrinkThumb)
+            .load(this.model.cocktail.strDrinkThumb)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     itemView.placeholder?.show()
@@ -51,6 +50,30 @@ class CocktailViewHolder(itemView: View, private val cocktailsPresenter: Cocktai
 
             })
 
+
+        if (this.model.isAddedToFavourites) {
+            itemView.favouriteImageView?.setImageResource(R.drawable.ic_favorite_black_24dp)
+        } else {
+            itemView.favouriteImageView?.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+        }
+
+        itemView.cocktailImageView?.setOnClickListener {
+            this.model.cocktail.idDrink?.let {
+                cocktailsPresenter.showDetailsOf(it)
+            }
+        }
+
+        itemView.placeholder?.setOnClickListener {
+            this.model.cocktail.idDrink?.let {
+                cocktailsPresenter.showDetailsOf(it)
+            }
+        }
+
+        itemView.cocktialTitleTextView?.setOnClickListener {
+            this.model.cocktail.idDrink?.let {
+                cocktailsPresenter.showDetailsOf(it)
+            }
+        }
 
     }
 

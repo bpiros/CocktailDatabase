@@ -2,8 +2,10 @@ package com.bme.aut.cocktaildatabase.ui.favourites
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
 import com.bme.aut.cocktaildatabase.model.Cocktail
@@ -19,17 +21,19 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
     @Inject
     lateinit var favouritesPresenter: FavouritesPresenter
 
+    private lateinit var adapter: FavouritesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injector.inject(this)
         setContentView(R.layout.activity_favourites)
-
-        init()
     }
 
     override fun onStart() {
         super.onStart()
         favouritesPresenter.attachScreen(this)
+
+        init()
     }
 
     override fun onStop() {
@@ -38,22 +42,37 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
     }
 
     private fun init() {
-        //TODO: init ui elements
+        adapter = FavouritesAdapter(favouritesPresenter)
+
+        cocktailsRecyclerview?.adapter = adapter
+        cocktailsRecyclerview?.layoutManager = LinearLayoutManager(this)
+
+        bottomNavigationView?.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.action_cocktails -> {
+                    favouritesPresenter.navigateToCocktails()
+                }
+            }
+            true
+        }
+
+        bottomNavigationView?.selectedItemId = R.id.action_favourites
+
+        favouritesPresenter.showFavourites()
     }
 
     override fun removeFromFavourites(cocktailId: String?) {
-        //TODO: update adapter, remove the cocktail from list
-    }
-
-    override fun updateFavourites(cocktail: Cocktail) {
-        //TODO: update list with cocktail
+        cocktailId?.let {
+            adapter.removeCocktail(cocktailId)
+        }
     }
 
     override fun updateFavourites(cocktails: List<Cocktail>) {
-        //TODO: update list with cocktail
+        adapter.clearData()
+        adapter.updateData(cocktails)
     }
 
-    override fun showCocktails() {
+    override fun navigateToCocktails() {
         val intent = Intent(this, CocktailsActivity::class.java)
         startActivity(intent)
     }
@@ -73,7 +92,7 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

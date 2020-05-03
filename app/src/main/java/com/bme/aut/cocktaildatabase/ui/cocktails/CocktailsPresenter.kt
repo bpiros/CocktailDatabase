@@ -76,7 +76,9 @@ class CocktailsPresenter @Inject constructor(
                 if (event.cocktails == null) {
                     screen?.showToast("Something went wrong. Try it later.")
                 } else {
-                    screen?.showCocktails(event.cocktails!!)
+                    cocktailsInteractor.getFavourites{favourites->
+                        screen?.showCocktails(event.cocktails!!, favourites)
+                    }
                 }
             }
         }
@@ -94,7 +96,9 @@ class CocktailsPresenter @Inject constructor(
             if (event.cocktails == null || event.cocktails?.isEmpty() == true) {
                 screen?.sayNoResults()
             } else {
-                screen?.showSearchResults(event.cocktails!!)
+                cocktailsInteractor.getFavourites(){favourites ->
+                    screen?.showSearchResults(event.cocktails!!, favourites)
+                }
             }
         }
     }
