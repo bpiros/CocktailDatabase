@@ -7,12 +7,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/colorPrimary"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/colorWhite"
+        tools:title="Details of ..." />
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -25,25 +27,141 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Details"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/colorWhite"
-        app:itemTextColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollableConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cocktailImageView"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/placeholderImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorGrey"
+                android:elevation="8dp"
+                android:padding="25dp"
+                android:src="@drawable/ic_glass_cocktail"
+                android:tint="@color/colorWhite"
+                android:tintMode="src_atop"
+                app:layout_constraintBottom_toBottomOf="@id/cocktailImageView"
+                app:layout_constraintLeft_toLeftOf="@id/cocktailImageView"
+                app:layout_constraintRight_toRightOf="@id/cocktailImageView"
+                app:layout_constraintTop_toTopOf="@id/cocktailImageView" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScorllView"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cocktailImageView">
+
+                <LinearLayout
+                    android:id="@+id/tagLinearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/ibaTypeTeytView"
+                android:layout_width="0dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontalScorllView" />
+
+            <TextView
+                android:id="@+id/ingredientsTextView"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Ingredients:"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ibaTypeTeytView" />
+
+            <LinearLayout
+                android:id="@+id/ingredientsLinearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ingredientsTextView" />
+
+            <TextView
+                android:id="@+id/howToTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="How to prepare:"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ingredientsLinearLayout" />
+
+            <TextView
+                android:id="@+id/preaprationTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/howToTextView"
+                tools:text="sdfsdfsdfsdf sdf sd fsdf sdf sdf sdffdsfa sdf asdf adsf alksdjf aldkfj alkdfj alsdfj alsdfk jalfd jaldkf j   description:" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigationView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="?attr/actionBarSize"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        android:elevation="8dp"-->
+    <!--        app:itemBackground="@color/colorPrimary"-->
+    <!--        app:itemIconTint="@color/bottom_nav_item_color"-->
+    <!--        app:itemTextColor="@color/bottom_nav_item_color"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:menu="@menu/bottom_nav_menu" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

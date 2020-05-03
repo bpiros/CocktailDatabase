@@ -58,21 +58,15 @@ class CocktailViewHolder(itemView: View, private val cocktailsPresenter: Cocktai
         }
 
         itemView.cocktailImageView?.setOnClickListener {
-            this.model.cocktail.idDrink?.let {
-                cocktailsPresenter.showDetailsOf(it)
-            }
+            cocktailsPresenter.showDetailsOf(this.model.cocktail)
         }
 
         itemView.placeholder?.setOnClickListener {
-            this.model.cocktail.idDrink?.let {
-                cocktailsPresenter.showDetailsOf(it)
-            }
+            cocktailsPresenter.showDetailsOf(this.model.cocktail)
         }
 
         itemView.cocktialTitleTextView?.setOnClickListener {
-            this.model.cocktail.idDrink?.let {
-                cocktailsPresenter.showDetailsOf(it)
-            }
+            cocktailsPresenter.showDetailsOf(this.model.cocktail)
         }
 
     }

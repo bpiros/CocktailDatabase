@@ -11,6 +11,6 @@ interface FavouritesScreen : Screen {
 
     fun navigateToCocktails()
 
-    fun showDetails(cocktailId: String)
+    fun showDetails(cocktail: Cocktail)
 
 }

@@ -3,6 +3,7 @@ package com.bme.aut.cocktaildatabase.ui.details
 import com.bme.aut.cocktaildatabase.interactor.CocktailsInteractor
 import com.bme.aut.cocktaildatabase.interactor.events.GetCocktailDetailsEvent
 import com.bme.aut.cocktaildatabase.interactor.events.SavedToFavouritesEvent
+import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -26,19 +27,16 @@ class DetailsPresenter @Inject constructor(
         super.detachScreen()
     }
 
-    fun showDetails(id: Int) {
-        screen?.startLoading()
-        executor.execute {
-            cocktailsInteractor.getCocktailDetails(id)
-        }
+    fun showDetails(cocktail: Cocktail) {
+        screen?.showDetails(cocktail)
     }
 
     fun showCocktails() {
-        screen?.showCocktails()
+        screen?.navigateToCocktails()
     }
 
     fun showFavourites() {
-        screen?.showFavourites()
+        screen?.navigateToFavourites()
     }
 
     fun navigateBack() {

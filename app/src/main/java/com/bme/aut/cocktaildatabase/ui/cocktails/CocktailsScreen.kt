@@ -7,7 +7,7 @@ interface CocktailsScreen : Screen {
 
     fun showCocktails(cocktails: List<Cocktail>, favourites: ArrayList<Cocktail>?)
 
-    fun showDetails(cocktailId: String)
+    fun showDetails(cocktail: Cocktail)
 
     fun showSearchResults(cocktails: ArrayList<Cocktail>, favourites: ArrayList<Cocktail>?)
 

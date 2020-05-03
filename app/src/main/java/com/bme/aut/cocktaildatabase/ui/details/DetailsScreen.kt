@@ -7,9 +7,9 @@ interface DetailsScreen : Screen {
 
     fun showDetails(cocktail: Cocktail)
 
-    fun showCocktails()
+    fun navigateToCocktails()
 
-    fun showFavourites()
+    fun navigateToFavourites()
 
     fun navigateBack()
 

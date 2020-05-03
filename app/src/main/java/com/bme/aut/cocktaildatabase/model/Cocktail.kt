@@ -1,9 +1,12 @@
 package com.bme.aut.cocktaildatabase.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity
 data class Cocktail(
 
@@ -73,50 +76,50 @@ data class Cocktail(
     @SerializedName("strDrinkThumb")
     val strDrinkThumb: String? = null,
 
-    @SerializedName("redient1")
-    val redient1: String? = null,
+    @SerializedName("strIngredient1")
+    val strIngredient1: String? = null,
 
-    @SerializedName("redient2")
-    val redient2: String? = null,
+    @SerializedName("strIngredient2")
+    val strIngredient2: String? = null,
 
-    @SerializedName("redient3")
-    val redient3: String? = null,
+    @SerializedName("strIngredient3")
+    val strIngredient3: String? = null,
 
-    @SerializedName("redient4")
-    val redient4: String? = null,
+    @SerializedName("strIngredient4")
+    val strIngredient4: String? = null,
 
-    @SerializedName("redient5")
-    val redient5: String? = null,
+    @SerializedName("strIngredient5")
+    val strIngredient5: String? = null,
 
-    @SerializedName("redient6")
-    val redient6: String? = null,
+    @SerializedName("strIngredient6")
+    val strIngredient6: String? = null,
 
-    @SerializedName("redient7")
-    val redient7: String? = null,
+    @SerializedName("strIngredient7")
+    val strIngredient7: String? = null,
 
-    @SerializedName("redient8")
-    val redient8: String? = null,
+    @SerializedName("strIngredient8")
+    val strIngredient8: String? = null,
 
-    @SerializedName("redient9")
-    val redient9: String? = null,
+    @SerializedName("strIngredient9")
+    val strIngredient9: String? = null,
 
-    @SerializedName("redient10")
-    val redient10: String? = null,
+    @SerializedName("strIngredient10")
+    val strIngredient10: String? = null,
 
-    @SerializedName("redient11")
-    val redient11: String? = null,
+    @SerializedName("strIngredient11")
+    val strIngredient11: String? = null,
 
-    @SerializedName("redient12")
-    val redient12: String? = null,
+    @SerializedName("strIngredient12")
+    val strIngredient12: String? = null,
 
-    @SerializedName("redient13")
-    val redient13: String? = null,
+    @SerializedName("strIngredient13")
+    val strIngredient13: String? = null,
 
-    @SerializedName("redient14")
-    val redient14: String? = null,
+    @SerializedName("strIngredient14")
+    val strIngredient14: String? = null,
 
-    @SerializedName("redient15")
-    val redient15: String? = null,
+    @SerializedName("strIngredient15")
+    val strIngredient15: String? = null,
 
     @SerializedName("strMeasure1")
     val strMeasure1: String? = null,
@@ -169,4 +172,4 @@ data class Cocktail(
     @SerializedName("dateModified")
     val dateModified: String? = null
 
-)
+) : Parcelable

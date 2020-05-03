@@ -44,8 +44,8 @@ class FavouritesPresenter @Inject constructor(
         screen?.navigateToCocktails()
     }
 
-    fun showToDetails(cocktailId: String) {
-        screen?.showDetails(cocktailId)
+    fun showToDetails(cocktail: Cocktail) {
+        screen?.showDetails(cocktail)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

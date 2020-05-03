@@ -77,9 +77,9 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
         startActivity(intent)
     }
 
-    override fun showDetails(cocktailId: String) {
+    override fun showDetails(cocktail: Cocktail) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(DetailsActivity.KEY, cocktailId)
+        intent.putExtra(DetailsActivity.KEY, cocktail)
         startActivity(intent)
     }
 

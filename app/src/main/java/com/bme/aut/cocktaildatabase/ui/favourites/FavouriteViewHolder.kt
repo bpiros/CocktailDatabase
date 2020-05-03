@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.view_favourite_item.view.*
-import kotlinx.android.synthetic.main.view_toolbar.view.*
 
 class FavouriteViewHolder(itemView: View, private val favouritesPresenter: FavouritesPresenter) :
     RecyclerView.ViewHolder(itemView) {
@@ -37,6 +36,18 @@ class FavouriteViewHolder(itemView: View, private val favouritesPresenter: Favou
 
         itemView.deleteImageView?.setOnClickListener {
             favouritesPresenter.removeFromFavourites(cocktail)
+        }
+
+        itemView.placeholder?.setOnClickListener {
+            favouritesPresenter.showToDetails(cocktail)
+        }
+
+        itemView.cocktailImageView?.setOnClickListener {
+            favouritesPresenter.showToDetails(cocktail)
+        }
+
+        itemView.favouriteTitleTextView?.setOnClickListener {
+            favouritesPresenter.showToDetails(cocktail)
         }
 
     }

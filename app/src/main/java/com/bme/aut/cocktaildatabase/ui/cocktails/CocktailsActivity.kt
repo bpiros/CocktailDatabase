@@ -80,9 +80,9 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         adapter.updateData(cocktails, favourites)
     }
 
-    override fun showDetails(cocktailId: String) {
+    override fun showDetails(cocktail: Cocktail) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(DetailsActivity.KEY, cocktailId)
+        intent.putExtra(DetailsActivity.KEY, cocktail)
         startActivity(intent)
     }
 
