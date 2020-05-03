@@ -8,9 +8,13 @@ import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.concurrent.Executor
 import javax.inject.Inject
 
-class FavouritesPresenter @Inject constructor(private val cocktailsInteractor: CocktailsInteractor) :
+class FavouritesPresenter @Inject constructor(
+    private val executor: Executor,
+    private val cocktailsInteractor: CocktailsInteractor
+) :
     Presenter<FavouritesScreen>() {
 
     override fun attachScreen(screen: FavouritesScreen) {
@@ -25,11 +29,15 @@ class FavouritesPresenter @Inject constructor(private val cocktailsInteractor: C
 
     fun showFavourites() {
         screen?.startLoading()
-        cocktailsInteractor.getFavourites()
+        executor.execute {
+            cocktailsInteractor.getFavourites()
+        }
     }
 
     fun removeFromFavourites(cocktail: Cocktail) {
-        cocktailsInteractor.deleteFromFavourites(cocktail)
+        executor.execute {
+            cocktailsInteractor.deleteFromFavourites(cocktail)
+        }
         screen?.removeFromFavourites(cocktail.idDrink)
     }
 
@@ -60,7 +68,6 @@ class FavouritesPresenter @Inject constructor(private val cocktailsInteractor: C
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onFavouritesThread(event: RemovedFromFavouritesEvent) {
-        screen?.endLoading()
         if (event.throwable != null) {
             event.throwable?.printStackTrace()
             if (screen != null) {

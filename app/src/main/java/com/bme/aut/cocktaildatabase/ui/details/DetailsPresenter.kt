@@ -7,9 +7,13 @@ import com.bme.aut.cocktaildatabase.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.concurrent.Executor
 import javax.inject.Inject
 
-class DetailsPresenter @Inject constructor(private val cocktailsInteractor: CocktailsInteractor) :
+class DetailsPresenter @Inject constructor(
+    private val executor: Executor,
+    private val cocktailsInteractor: CocktailsInteractor
+) :
     Presenter<DetailsScreen>() {
 
     override fun attachScreen(screen: DetailsScreen) {
@@ -24,7 +28,9 @@ class DetailsPresenter @Inject constructor(private val cocktailsInteractor: Cock
 
     fun showDetails(id: Int) {
         screen?.startLoading()
-        cocktailsInteractor.getCocktailDetails(id)
+        executor.execute {
+            cocktailsInteractor.getCocktailDetails(id)
+        }
     }
 
     fun showCocktails() {

@@ -51,7 +51,7 @@ dependencies {
 
     //for okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:4.5.0"
 
     //for EventBus
@@ -63,4 +63,12 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.5"
     testImplementation "androidx.room:room-testing:2.2.5"
     implementation "com.google.code.gson:gson:2.8.5"
+
+    //for Bottom Navigation View
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //for Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }

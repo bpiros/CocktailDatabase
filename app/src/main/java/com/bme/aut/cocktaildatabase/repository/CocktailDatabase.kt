@@ -8,7 +8,7 @@ import com.bme.aut.cocktaildatabase.model.Cocktail
 @Database(
     entities = [
         Cocktail::class
-    ], version = 0, exportSchema = false
+    ], version = 1, exportSchema = false
 )
 
 @TypeConverters()

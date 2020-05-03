@@ -32,6 +32,7 @@ class CocktailsInteractor @Inject constructor(
                 }
             }
 
+            event.cocktails = cocktails.toList()
             EventBus.getDefault().post(event)
         } catch (e: java.lang.Exception) {
             event.throwable = e

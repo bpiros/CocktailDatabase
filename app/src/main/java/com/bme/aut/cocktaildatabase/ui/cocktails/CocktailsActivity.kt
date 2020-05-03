@@ -2,14 +2,17 @@ package com.bme.aut.cocktaildatabase.ui.cocktails
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bme.aut.cocktaildatabase.R
 import com.bme.aut.cocktaildatabase.di.injector
 import com.bme.aut.cocktaildatabase.model.Cocktail
 import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
 import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
 import com.bme.aut.cocktaildatabase.ui.utils.hide
+import com.bme.aut.cocktaildatabase.ui.utils.hideSoftKeyboard
 import com.bme.aut.cocktaildatabase.ui.utils.show
 import kotlinx.android.synthetic.main.activity_cocktails.*
 import javax.inject.Inject
@@ -19,17 +22,18 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     @Inject
     lateinit var cocktailPresenter: CocktailsPresenter
 
+    private lateinit var adapter: CocktailsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injector.inject(this)
         setContentView(R.layout.activity_cocktails)
-
-        init()
     }
 
     override fun onStart() {
         super.onStart()
         cocktailPresenter.attachScreen(this)
+        init()
     }
 
     override fun onStop() {
@@ -38,11 +42,44 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     private fun init() {
-        //TODO: init ui elements
+        cocktailPresenter.showCocktails()
+
+        adapter = CocktailsAdapter(cocktailPresenter)
+
+        cocktailsRecyclerview?.layoutManager = LinearLayoutManager(this)
+        cocktailsRecyclerview?.adapter = adapter
+//        cocktailsRecyclerview?.addItemDecoration(CocktailsItemDecorator(this))
+
+        toolbar?.bind(
+            onSearchClick = { searchTerm ->
+                if (searchTerm.isNotBlank()) {
+                    cocktailPresenter.showCocktailsSearchList(searchTerm)
+                } else {
+                    cocktailPresenter.showCocktails()
+                }
+                hideSoftKeyboard()
+            },
+            onTitleClick = {
+                cocktailPresenter.showCocktails()
+                hideSoftKeyboard()
+            }
+        )
+
+        bottomNavigationView?.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.action_favourites -> {
+                    cocktailPresenter.showFavourites()
+                }
+            }
+            true
+        }
+
+        bottomNavigationView?.selectedItemId = R.id.action_cocktails
     }
 
     override fun showCocktails(cocktails: List<Cocktail>) {
-        //TODO: show cocktails
+        messageTextView?.hide()
+        adapter.updateData(cocktails)
     }
 
     override fun showDetails(cocktailId: String) {
@@ -52,7 +89,9 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     override fun showSearchResults(cocktails: ArrayList<Cocktail>) {
-        //TODO: show results
+        messageTextView?.hide()
+        adapter.clearData()
+        adapter.updateData(cocktails)
     }
 
     override fun showFavourites() {
@@ -61,6 +100,10 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
     }
 
     override fun startLoading() {
+        try {
+            adapter.clearData()
+        } catch (e: Exception) {
+        }
         progressbar?.show()
     }
 
