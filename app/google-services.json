@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "86199402406",
+    "firebase_url": "https://cocktaildatabase-6997b.firebaseio.com",
+    "project_id": "cocktaildatabase-6997b",
+    "storage_bucket": "cocktaildatabase-6997b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86199402406:android:d61a7ea275a6de3cf41967",
+        "android_client_info": {
+          "package_name": "com.bme.aut.cocktaildatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86199402406-vkmakliv2ccebs5h9gukndmt0etda1i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBgSpNlQRxv48tUWVIO1IYeQQo9a-ClTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86199402406-vkmakliv2ccebs5h9gukndmt0etda1i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
