@@ -13,6 +13,7 @@ import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.Executor
 import javax.inject.Inject
 
+
 class CocktailsPresenter @Inject constructor(
     private val executor: Executor,
     private val cocktailsInteractor: CocktailsInteractor
@@ -76,7 +77,7 @@ class CocktailsPresenter @Inject constructor(
                 if (event.cocktails == null) {
                     screen?.showToast("Something went wrong. Try it later.")
                 } else {
-                    cocktailsInteractor.getFavourites{favourites->
+                    cocktailsInteractor.getFavourites { favourites ->
                         screen?.showCocktails(event.cocktails!!, favourites)
                     }
                 }
@@ -96,7 +97,7 @@ class CocktailsPresenter @Inject constructor(
             if (event.cocktails == null || event.cocktails?.isEmpty() == true) {
                 screen?.sayNoResults()
             } else {
-                cocktailsInteractor.getFavourites(){favourites ->
+                cocktailsInteractor.getFavourites() { favourites ->
                     screen?.showSearchResults(event.cocktails!!, favourites)
                 }
             }

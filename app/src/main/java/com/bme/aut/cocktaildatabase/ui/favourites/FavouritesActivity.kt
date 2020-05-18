@@ -13,6 +13,7 @@ import com.bme.aut.cocktaildatabase.ui.cocktails.CocktailsActivity
 import com.bme.aut.cocktaildatabase.ui.details.DetailsActivity
 import com.bme.aut.cocktaildatabase.ui.utils.hide
 import com.bme.aut.cocktaildatabase.ui.utils.show
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_favourites.*
 import javax.inject.Inject
 
@@ -62,6 +63,11 @@ class FavouritesActivity : AppCompatActivity(), FavouritesScreen {
     }
 
     override fun removeFromFavourites(cocktailId: String?) {
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "DELETE_FAVOURITE")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Delete favourite")
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
         cocktailId?.let {
             adapter.removeCocktail(cocktailId)
         }

@@ -21,6 +21,7 @@ import com.bme.aut.cocktaildatabase.ui.utils.show
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
@@ -49,6 +50,11 @@ class DetailsActivity : AppCompatActivity(), DetailsScreen {
     }
 
     private fun init() {
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "SEE_DETAILS")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "See details")
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
         val cocktail = intent.getParcelableExtra<Cocktail>(DetailsActivity.KEY)
         detailsPresenter.showDetails(cocktail)
 

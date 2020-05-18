@@ -14,6 +14,7 @@ import com.bme.aut.cocktaildatabase.ui.favourites.FavouritesActivity
 import com.bme.aut.cocktaildatabase.ui.utils.hide
 import com.bme.aut.cocktaildatabase.ui.utils.hideSoftKeyboard
 import com.bme.aut.cocktaildatabase.ui.utils.show
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_cocktails.*
 import javax.inject.Inject
 
@@ -90,6 +91,11 @@ class CocktailsActivity : AppCompatActivity(), CocktailsScreen {
         cocktails: ArrayList<Cocktail>,
         favourites: ArrayList<Cocktail>?
     ) {
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "SEARCH_COCKTAIL")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Search cocktail")
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
+
         messageTextView?.hide()
         adapter.clearData()
         adapter.updateData(cocktails, favourites)
