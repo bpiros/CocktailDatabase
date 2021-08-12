@@ -1,7 +1,7 @@
 # CocktailDatabase
 University project to exercise developing in MVP architecture.
 
-The show data from the api: link (TODO)
+The show data from the api: [TheCocktailDB](https://www.thecocktaildb.com/)
 
 ### Features:
  * shows recepies and images of cocktails
