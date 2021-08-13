@@ -15,9 +15,10 @@ The show data from the api: [TheCocktailDB](https://www.thecocktaildb.com/)
  * Dependency injection with Dagger2
  * RESTFUL api communication with Retrofit2
 
-![cocktail list with like](https://user-images.githubusercontent.com/37157607/129352065-06928a03-3997-4817-974c-ab8d0c19bc60.gif)
-![cocktail details page](https://user-images.githubusercontent.com/37157607/129347007-0f4b14da-aa0a-4c41-879e-5d8a8cefdea8.gif)
-![cocktails favourites](https://user-images.githubusercontent.com/37157607/129340336-1803c7c0-3f7f-480c-8bce-b38953b25b98.gif)
+ 
+ 
+<img src="https://user-images.githubusercontent.com/37157607/129358108-1905f5fc-140d-4080-912c-01d58f6a8ad1.gif" width="300" height="650"> <img src="https://user-images.githubusercontent.com/37157607/129358147-61c12427-e779-46b7-b419-1c0521fb019d.gif" width="300" height="650"> <img src="https://user-images.githubusercontent.com/37157607/129358174-d87d93bc-de63-4e32-b3ec-54d79193ad0a.gif" width="300" height="650">
+
 
 
 
