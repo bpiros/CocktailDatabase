@@ -1,5 +1,5 @@
 # CocktailDatabase
-I made this university project to exercise developing in MVP architecture.
+University project to exercise developing in MVP architecture.
 
 The show data from the api: [TheCocktailDB](https://www.thecocktaildb.com/)
 
