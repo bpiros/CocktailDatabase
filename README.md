@@ -1,15 +1,15 @@
-# CocktailDatabase
-University project to exercise developing in MVP architecture.
+# Description
+University project (2021) to exercise developing in MVP architecture. 
 
-The show data from the api: [TheCocktailDB](https://www.thecocktaildb.com/)
+This small app shows data from [TheCocktailDB](https://www.thecocktaildb.com/)
 
-### Features:
+## Features
  * show recepies, details and images of cocktails
  * save cocktails to favourites
  * search cocktails by name
  * infinite scroll
  
-### Technologies/libraries:
+## Technologies & libraries
  * Kotlin
  * MVP architecture
  * Dependency injection with Dagger2
